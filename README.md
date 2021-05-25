@@ -3,7 +3,7 @@ Firebase is Google's mobile platform that helps you quickly develop high-quality
 
 ---
 
-## Development notes on setup of this extension
+## Development notes
 Use this guide when setting up or upgrading this core extension and the extensions for each of the Firebase products (such as analytics and remote config). The extensions are using the [Firebase C++ SDK](https://firebase.google.com/docs/cpp/setup). Current version: 7.3.0.
 
 * Download link: https://firebase.google.com/download/cpp
