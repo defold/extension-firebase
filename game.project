@@ -1,0 +1,36 @@
+[project]
+title = extension-firebase
+custom_resources = 
+bundle_resources = /bundle
+dependencies#0 = https://github.com/britzl/gooey/archive/6.5.0.zip
+dependencies#1 = https://github.com/britzl/monarch/archive/2.13.0.zip
+
+[bootstrap]
+main_collection = /example/example.collectionc
+
+[input]
+game_binding = /input/game.input_bindingc
+
+[display]
+width = 640
+height = 1136
+
+[script]
+shared_state = 1
+
+[library]
+include_dirs = firebase
+
+[ios]
+bundle_identifier = com.defold.firebase
+infoplist = /builtins/manifests/ios/Info.plist
+
+[android]
+package = com.defold.firebase
+
+[osx]
+bundle_identifier = com.defold.firebase
+
+[native_extension]
+app_manifest = /generated.appmanifest
+
