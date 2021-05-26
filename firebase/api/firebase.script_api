@@ -7,11 +7,10 @@
     type: function
     desc: Initialise Firebase
 
-  - name: analytics.log
-    type: function
-    desc: Log an event with no parameters. (Official docs https://firebase.google.com/docs/reference/cpp/namespace/firebase/analytics#logevent_5)
-
-    parameters:
-    - name: name
+    return:
+    - name: success
+      type: boolean
+      desc: Indicates if initialisation was successful
+    - name: error
       type: string
-      desc: Event name
+      desc: Error message if initialisation failed

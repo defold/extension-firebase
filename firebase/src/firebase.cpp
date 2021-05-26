@@ -17,30 +17,32 @@ using namespace firebase;
 
 
 static int Firebase_Init(lua_State* L) {
-	DM_LUA_STACK_CHECK(L, 0);
-	dmLogInfo("Firebase_Init");
+	DM_LUA_STACK_CHECK(L, 2);
 
 #if defined (DM_DEBUG)
-	// do some stuff for debug purposes
 	FIR_PlatformDebugInit();
 #endif
+
 #if defined(DM_PLATFORM_ANDROID)
-	dmLogInfo("Creating app");
 	JNIEnv* env = 0;
 	dmGraphics::GetNativeAndroidJavaVM()->AttachCurrentThread(&env, NULL);
 	firebase_app_ = App::Create(env, dmGraphics::GetNativeAndroidActivity());
 #else
-	dmLogInfo("Creating app");
 	firebase_app_ = App::Create();
 #endif
 
-	if(!firebase_app_) {
-		dmLogError("firebase::App::Create failed");
-		return 0;
+	if(!firebase_app_)
+	{
+		lua_pushboolean(L, 0);
+		lua_pushstring(L, "Failed to create Firebase App");
+	}
+	else
+	{
+		lua_pushboolean(L, 1);
+		lua_pushnil(L);
 	}
 
-	dmLogInfo("Firebase_Init done");
-	return 0;
+	return 2;
 }
 
 
