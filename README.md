@@ -14,16 +14,29 @@ Use this guide when setting up or upgrading this core extension and the extensio
 Copy header files from `firebase_cpp_sdk/include`.
 
 
-### Copy Android Java JAR dependencies
-The dependencies used by this extension need to match the ones specified in `firebase_cpp_sdk/Android/firebase_dependencies.gradle` -> `firebaseDependenciesMap -> 'analytics'`. Also specified in `readme.md` in the root of the unzipped `firebase_cpp_sdk_7.3.0.zip`.
+### Configure Android Gradle dependencies
+The Gradle dependencies used by this extension need to match the ones specified in the Firebase C++ SDK.
+
+* Add Gradle dependencies to `extension/manifests/android/build.gradle`
+   * Specified in `firebase_cpp_sdk/Android/firebase_dependencies.gradle` -> `firebaseDependenciesMap`
+   * Or in `firebase_cpp_sdk/readme.md`
 
 
 #### Copy Android C++ library dependencies
-Copy libs from `firebase_cpp_sdk/libs/android/armeabi-v7a/c++/*` and `firebase_cpp_sdk/libs/android/arm64-v8a/c++/*`
+Android C++ libraries should be copied from the Firebase C++ SDK to your extension.
+
+* Copy libs from Firebase C++ SDK
+   * `firebase_cpp_sdk/libs/android/armeabi-v7a/c++/*`
+   * `firebase_cpp_sdk/libs/android/arm64-v8a/c++/*`
 
 
 #### Copy iOS dependencies
-Setup for iOS is made without CocoaPods using a direct download of the [Firebase iOS SDK from GitHub](https://github.com/firebase/firebase-ios-sdk/releases). It is important to use a version of the iOS SDK matching the iOS dependencies in `readme.md` in the root of the unzipped `firebase_cpp_sdk_7.3.0.zip` file.
+Setup for iOS is made without CocoaPods using a direct download of the [Firebase iOS SDK from GitHub](https://github.com/firebase/firebase-ios-sdk/releases). It is important to use a version of the iOS SDK matching the iOS dependencies in `firebase_cpp_sdk/readme.md`.
 
-* Copy frameworks from iOS SDK. Note that Defold doesn't support `*.xcframework` files. You need to unpack all the `*.framework` files from `*.xcframework` and put to folders according to architecture.
-* Copy libs from CPP SDK. From `firebase_cpp_sdk/libs/ios/device-arm64/`, `firebase_cpp_sdk/libs/ios/device-armv7/` and `firebase_cpp_sdk/libs/ios/simulator-x86_64/`.
+* Copy frameworks from iOS SDK. Note that Defold doesn't support `*.xcframework` files. You need to unpack/open all the `*.framework` files from `*.xcframework` and put to folders according to architecture.
+   * `FirebaseFoobar.xcframework/ios-arm64_armv7/*.framework` -> `extension/libs/ios`
+   * `FirebaseFoobar.xcframework/ios-arm64_i386_x86_64-simulator/*.framework` -> `extension/libs/x86_64-ios`
+* Copy libs from the Firebase C++ SDK
+   * `firebase_cpp_sdk/libs/ios/device-arm64/`
+   * `firebase_cpp_sdk/libs/ios/device-armv7/`
+   * `firebase_cpp_sdk/libs/ios/simulator-x86_64/`
