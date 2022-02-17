@@ -9,7 +9,7 @@
 #include "luautils.h"
 #include "platform_utils.h"
 #include "firebase/app.h"
-
+#include "firebase/installations.h"
 
 static firebase::App* firebase_app_;
 static dmScript::LuaCallbackInfo* g_AuthTokenCallback;
