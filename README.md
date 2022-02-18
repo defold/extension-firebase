@@ -20,7 +20,7 @@ Copy header files from `firebase_cpp_sdk/include`.
 The Gradle dependencies used by this extension need to match the ones specified in the Firebase C++ SDK.
 
 * Add Gradle dependencies to `extension/manifests/android/build.gradle`
-   * Specified in `firebase_cpp_sdk/Android/firebase_dependencies.gradle` -> `firebaseDependenciesMap`
+   * Specified in `firebase_cpp_sdk/Android/firebase_dependencies.gradle` -> [`firebaseDependenciesMap`](https://github.com/firebase/firebase-cpp-sdk/blob/v7.3.0/release_build_files/Android/firebase_dependencies.gradle)
    * Or in [`firebase_cpp_sdk/readme.md`](https://raw.githubusercontent.com/firebase/firebase-cpp-sdk/v7.3.0/release_build_files/readme.md)
 
 
