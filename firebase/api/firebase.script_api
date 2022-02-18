@@ -14,3 +14,12 @@
     - name: error
       type: string
       desc: Error message if initialisation failed
+
+  - name: get_installation_auth_token
+    type: function
+    desc: Get the Firebase Installation auth token
+
+    parameters:
+    - name: callback
+      type: function
+      desc: Function to invoke with the auth token (self, token)
