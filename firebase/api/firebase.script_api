@@ -15,7 +15,7 @@
       type: string
       desc: Error message if initialisation failed
 
-  - name: get_auth_token
+  - name: get_installation_auth_token
     type: function
     desc: Get the Firebase Installation auth token
 

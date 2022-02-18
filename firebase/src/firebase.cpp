@@ -12,7 +12,7 @@
 #include "firebase/installations.h"
 
 static firebase::App* firebase_app_;
-static dmScript::LuaCallbackInfo* g_AuthTokenCallback;
+static dmScript::LuaCallbackInfo* g_InstallationAuthTokenCallback;
 
 using namespace firebase;
 
@@ -46,24 +46,24 @@ static int Firebase_Init(lua_State* L) {
 	return 2;
 }
 
-static int Firebase_GetAuthToken(lua_State* L) {
+static int Firebase_GetInstallationAuthToken(lua_State* L) {
 	DM_LUA_STACK_CHECK(L, 0);
 
-	g_AuthTokenCallback = dmScript::CreateCallback(L, 1);
+	g_InstallationAuthTokenCallback = dmScript::CreateCallback(L, 1);
 
 	auto* installations_object = installations::Installations::GetInstance(firebase::App::GetInstance());
 
 	installations_object->GetToken(false)
 		.OnCompletion([](const Future< std::string >& completed_future) {
-		if (!dmScript::IsCallbackValid(g_AuthTokenCallback))
+		if (!dmScript::IsCallbackValid(g_InstallationAuthTokenCallback))
 		{
-			dmLogWarning("Firebase auth token callback is not valid");
+			dmLogWarning("Firebase installation auth token callback is not valid");
 			return;
 		}
 
-		if (dmScript::SetupCallback(g_AuthTokenCallback))
+		if (dmScript::SetupCallback(g_InstallationAuthTokenCallback))
 		{
-			lua_State* L = dmScript::GetCallbackLuaContext(g_AuthTokenCallback);
+			lua_State* L = dmScript::GetCallbackLuaContext(g_InstallationAuthTokenCallback);
 
 			if (completed_future.error() == 0) {
 				lua_pushstring(L, completed_future.result()->c_str());
@@ -81,11 +81,11 @@ static int Firebase_GetAuthToken(lua_State* L) {
 					lua_pop(L, 2);
 				}
 			}
-			dmScript::TeardownCallback(g_AuthTokenCallback);
+			dmScript::TeardownCallback(g_InstallationAuthTokenCallback);
 		}
 
-		dmScript::DestroyCallback(g_AuthTokenCallback);
-		g_AuthTokenCallback = 0;
+		dmScript::DestroyCallback(g_InstallationAuthTokenCallback);
+		g_InstallationAuthTokenCallback = 0;
 			});
 	return 0;
 }
@@ -112,7 +112,7 @@ static void LuaInit(lua_State* L) {
 
 	// push functions on the firebase global table
 	lua_pushtablestringfunction(L, "init", Firebase_Init);
-	lua_pushtablestringfunction(L, "get_auth_token", Firebase_GetAuthToken);
+	lua_pushtablestringfunction(L, "get_installation_auth_token", Firebase_GetInstallationAuthToken);
 
 	lua_pop(L, 1); // pop "firebase" global table
 }
