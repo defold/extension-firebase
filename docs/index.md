@@ -92,14 +92,14 @@ function init(self)
             print(err)
             return
         end
-		
-		-- firebase is ready to use!
-		
-		-- auth token can be used for configuring test devices for A/B tests
-		firebase.get_auth_token(function(self, token)
-			print("auth token is " .. token)
-		end)
-	end
+        
+        -- firebase is ready to use!
+        
+        -- auth token can be used for configuring test devices for A/B tests
+        firebase.get_auth_token(function(self, token)
+            print("auth token is " .. token)
+        end)
+    end
 end
 ```
 
