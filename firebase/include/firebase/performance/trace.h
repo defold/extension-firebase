@@ -1,5 +1,7 @@
-#ifndef FIREBASE_PERFORMANCE_CLIENT_CPP_SRC_INCLUDE_FIREBASE_PERFORMANCE_TRACE_H_
-#define FIREBASE_PERFORMANCE_CLIENT_CPP_SRC_INCLUDE_FIREBASE_PERFORMANCE_TRACE_H_
+// Copyright 2021 Google LLC
+
+#ifndef FIREBASE_PERFORMANCE_SRC_INCLUDE_FIREBASE_PERFORMANCE_TRACE_H_
+#define FIREBASE_PERFORMANCE_SRC_INCLUDE_FIREBASE_PERFORMANCE_TRACE_H_
 
 #include <cstdint>
 #include <string>
@@ -82,7 +84,7 @@ class Trace {
   /// @brief Gets the value of the metric identified by the metric_name or 0
   /// if it hasn't yet been set.
   ///
-  /// @param[in] matric_name The name of the metric to get the value of.
+  /// @param[in] metric_name The name of the metric to get the value of.
   /// @return The previously set of the given metric or 0 if it hasn't been
   /// set.
   int64_t GetLongMetric(const char* metric_name) const;
@@ -90,7 +92,7 @@ class Trace {
   /// @brief Increments the existing value of the given metric by
   /// increment_by or sets it to increment_by if the metric hasn't been set.
   ///
-  /// @param[in] matric_name The name of the metric to increment the value
+  /// @param[in] metric_name The name of the metric to increment the value
   /// of.
   /// @param[in] increment_by The value by which the metric should be
   /// incremented.
@@ -131,4 +133,4 @@ class Trace {
 }  // namespace performance
 }  // namespace firebase
 
-#endif  // FIREBASE_PERFORMANCE_CLIENT_CPP_SRC_INCLUDE_FIREBASE_PERFORMANCE_TRACE_H_
+#endif  // FIREBASE_PERFORMANCE_SRC_INCLUDE_FIREBASE_PERFORMANCE_TRACE_H_

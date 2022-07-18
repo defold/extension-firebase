@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-#ifndef FIREBASE_APP_CLIENT_CPP_SRC_INCLUDE_FIREBASE_FUTURE_H_
-#define FIREBASE_APP_CLIENT_CPP_SRC_INCLUDE_FIREBASE_FUTURE_H_
+#ifndef FIREBASE_APP_SRC_INCLUDE_FIREBASE_FUTURE_H_
+#define FIREBASE_APP_SRC_INCLUDE_FIREBASE_FUTURE_H_
 
 #include <stddef.h>
 #include <stdint.h>
 
+#include <mutex>
 #include <utility>
 
 #include "firebase/internal/common.h"
@@ -28,11 +29,7 @@
 #include <functional>
 #endif
 
-#if !defined(FIREBASE_NAMESPACE)
-#define FIREBASE_NAMESPACE firebase
-#endif
-
-namespace FIREBASE_NAMESPACE {
+namespace firebase {
 
 // Predeclarations.
 /// @cond FIREBASE_APP_INTERNAL
@@ -313,6 +310,7 @@ class FutureBase {
 
   /// Returns true if the two Futures reference the same result.
   bool operator==(const FutureBase& rhs) const {
+    std::lock_guard<std::mutex> lock(mutex_);
     return api_ == rhs.api_ && handle_ == rhs.handle_;
   }
 
@@ -321,11 +319,16 @@ class FutureBase {
 
 #if defined(INTERNAL_EXPERIMENTAL)
   /// Returns the API-specific handle. Should only be called by the API.
-  const FutureHandle& GetHandle() const { return handle_; }
+  FutureHandle GetHandle() const {
+    std::lock_guard<std::mutex> lock(mutex_);
+    return handle_;
+  }
 #endif  // defined(INTERNAL_EXPERIMENTAL)
 
  protected:
   /// @cond FIREBASE_APP_INTERNAL
+
+  mutable std::mutex mutex_;
 
   /// Backpointer to the issuing API class.
   /// Set to nullptr when Future is invalidated.
@@ -522,10 +525,9 @@ class Future : public FutureBase {
 #endif  // defined(INTERNAL_EXPERIMENTAL)
 };
 
-// NOLINTNEXTLINE - allow namespace overridden
-}  // namespace FIREBASE_NAMESPACE
+}  // namespace firebase
 
 // Include the inline implementation.
 #include "firebase/internal/future_impl.h"
 
-#endif  // FIREBASE_APP_CLIENT_CPP_SRC_INCLUDE_FIREBASE_FUTURE_H_
+#endif  // FIREBASE_APP_SRC_INCLUDE_FIREBASE_FUTURE_H_
