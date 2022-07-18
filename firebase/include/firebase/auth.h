@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-#ifndef FIREBASE_AUTH_CLIENT_CPP_SRC_INCLUDE_FIREBASE_AUTH_H_
-#define FIREBASE_AUTH_CLIENT_CPP_SRC_INCLUDE_FIREBASE_AUTH_H_
+#ifndef FIREBASE_AUTH_SRC_INCLUDE_FIREBASE_AUTH_H_
+#define FIREBASE_AUTH_SRC_INCLUDE_FIREBASE_AUTH_H_
 
 #include <vector>
 
 #include "firebase/app.h"
+#include "firebase/auth/user.h"
 #include "firebase/future.h"
 #include "firebase/internal/common.h"
-#include "firebase/auth/user.h"
 
 #if !defined(DOXYGEN)
 #ifndef SWIG
@@ -532,6 +532,7 @@ class Auth {
   friend void EnableTokenAutoRefresh(AuthData* authData);
   friend void DisableTokenAutoRefresh(AuthData* authData);
   friend void ResetTokenRefreshCounter(AuthData* authData);
+  friend void LogHeartbeat(Auth* auth);
   /// @endcond
 
   // Find Auth instance using App.  Return null if the instance does not exist.
@@ -935,4 +936,4 @@ class FederatedOAuthProvider : public FederatedAuthProvider {
 }  // namespace auth
 }  // namespace firebase
 
-#endif  // FIREBASE_AUTH_CLIENT_CPP_SRC_INCLUDE_FIREBASE_AUTH_H_
+#endif  // FIREBASE_AUTH_SRC_INCLUDE_FIREBASE_AUTH_H_
