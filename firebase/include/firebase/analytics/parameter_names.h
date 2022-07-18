@@ -1,4 +1,4 @@
-// Copyright 2021 Google Inc. All Rights Reserved.
+// Copyright 2022 Google Inc. All Rights Reserved.
 
 #ifndef FIREBASE_ANALYTICS_CLIENT_CPP_INCLUDE_FIREBASE_ANALYTICS_PARAMETER_NAMES_H_
 #define FIREBASE_ANALYTICS_CLIENT_CPP_INCLUDE_FIREBASE_ANALYTICS_PARAMETER_NAMES_H_
@@ -224,6 +224,34 @@ static const char*const kParameterAdUnitName  =
 static const char*const kParameterAffiliation  =
     "affiliation";
 
+/// Campaign custom parameter (string). Used as a method of capturing
+/// custom data in a campaign. Use varies by network.
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterCP1, "custom_data"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterCP1, "custom_data"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterCP1  = "cp1";
+
 /// The individual campaign name, slogan, promo code, etc. Some networks
 /// have pre-defined macro to capture campaign information, otherwise can
 /// be populated by developer. Highly Recommended (string).
@@ -254,6 +282,36 @@ static const char*const kParameterAffiliation  =
 static const char*const kParameterCampaign  =
     "campaign";
 
+/// Campaign ID (string). Used for keyword analysis to identify a specific
+/// product promotion or strategic campaign. This is a required key for
+/// GA4 data import.
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterCampaignID, "7877652710"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterCampaignID, "7877652710"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterCampaignID  =
+    "campaign_id";
+
 /// Character used in game (string).
 ///
 ///
@@ -281,36 +339,6 @@ static const char*const kParameterCampaign  =
 /// </SWIG>
 static const char*const kParameterCharacter  =
     "character";
-
-/// The checkout step (1..N) (unsigned 64-bit integer).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterCheckoutStep, "1"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterCheckoutStep, "1"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-///
-/// <b>This constant has been deprecated.</b>
-static const char*const kParameterCheckoutStep  =
-    "checkout_step";
 
 /// Some option on a step in an ecommerce flow (string).
 ///
@@ -341,6 +369,36 @@ static const char*const kParameterCheckoutStep  =
 /// <b>This constant has been deprecated.</b>
 static const char*const kParameterCheckoutOption
      = "checkout_option";
+
+/// The checkout step (1..N) (unsigned 64-bit integer).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterCheckoutStep, "1"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterCheckoutStep, "1"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+///
+/// <b>This constant has been deprecated.</b>
+static const char*const kParameterCheckoutStep  =
+    "checkout_step";
 
 /// Campaign content (string).
 static const char*const kParameterContent  = "content";
@@ -400,15 +458,15 @@ static const char*const kParameterContentType  =
 /// </SWIG>
 static const char*const kParameterCoupon  = "coupon";
 
-/// Campaign custom parameter (string). Used as a method of capturing
-/// custom data in a campaign. Use varies by network.
+/// Creative Format (string). Used to identify the high-level
+/// classification of the type of ad served by a specific campaign.
 ///
 ///
 /// @if cpp_examples
 /// @code{.cpp}
 /// using namespace firebase::analytics;
 /// Parameter parameters[] = {
-///    Parameter(kParameterCP1, "custom_data"),
+///    Parameter(kParameterCreativeFormat, "display"),
 ///    // ...
 ///  };
 /// @endcode
@@ -419,14 +477,15 @@ static const char*const kParameterCoupon  = "coupon";
 /// @code{.cs}
 /// using Firebase.Analytics;
 /// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterCP1, "custom_data"),
+///   new Parameter(FirebaseAnalytics.ParameterCreativeFormat, "display"),
 ///    // ...
 ///  };
 /// @endcode
 ///
 /// @endif
 /// </SWIG>
-static const char*const kParameterCP1  = "cp1";
+static const char*const kParameterCreativeFormat  =
+    "creative_format";
 
 /// The name of a creative used in a promotional spot (string).
 ///
@@ -542,6 +601,36 @@ static const char*const kParameterCurrency  =
 static const char*const kParameterDestination  =
     "destination";
 
+/// Monetary value of discount associated with a purchase (double).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterDiscount, 2.0),
+///    Parameter(kParameterCurrency, "USD"),  // e.g. $2.00 USD
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterDiscount, 2.0),
+///   new Parameter(FirebaseAnalytics.ParameterCurrency, "USD"),  // e.g. $2.00 USD
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterDiscount  =
+    "discount";
+
 /// The arrival date, check-out date or rental end date for the item. This
 /// should be in YYYY-MM-DD format (string).
 ///
@@ -569,6 +658,37 @@ static const char*const kParameterDestination  =
 /// @endif
 /// </SWIG>
 static const char*const kParameterEndDate  = "end_date";
+
+/// Indicates that the associated event should either extend the current
+/// session or start a new session if no session was active when the event
+/// was logged. Specify YES to extend the current session or to start a
+/// new session; any other value will not extend or start a session.
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterExtendSession, @YES),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterExtendSession, @YES),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterExtendSession  =
+    "extend_session";
 
 /// Flight number for travel events (string).
 ///
@@ -708,6 +828,118 @@ static const char*const kParameterItemBrand  =
 static const char*const kParameterItemCategory  =
     "item_category";
 
+/// Item Category (context-specific) (string).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterItemCategory2, "pants"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterItemCategory2, "pants"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterItemCategory2  =
+    "item_category2";
+
+/// Item Category (context-specific) (string).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterItemCategory3, "pants"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterItemCategory3, "pants"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterItemCategory3  =
+    "item_category3";
+
+/// Item Category (context-specific) (string).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterItemCategory4, "pants"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterItemCategory4, "pants"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterItemCategory4  =
+    "item_category4";
+
+/// Item Category (context-specific) (string).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterItemCategory5, "pants"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterItemCategory5, "pants"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterItemCategory5  =
+    "item_category5";
+
 /// Item ID (context-specific) (string).
 ///
 ///
@@ -734,6 +966,94 @@ static const char*const kParameterItemCategory  =
 /// @endif
 /// </SWIG>
 static const char*const kParameterItemID  = "item_id";
+
+/// The list in which the item was presented to the user (string).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterItemList, "Search Results"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterItemList, "Search Results"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+///
+/// <b>This constant has been deprecated. Use @c FirebaseAnalytics.ParameterItemListName constant instead.</b>
+static const char*const kParameterItemList  =
+    "item_list";
+
+/// The ID of the list in which the item was presented to the
+/// user (string).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterItemListID, "ABC123"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterItemListID, "ABC123"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterItemListID  =
+    "item_list_id";
+
+/// The name of the list in which the item was presented to the user
+/// (string).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterItemListName, "Related products"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterItemListName, "Related products"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterItemListName  =
+    "item_list_name";
 
 /// The Google <a href="https://developers.google.com/places/place-id">Place ID</a> (string) that
 /// corresponds to the associated item. Alternatively, you can supply your
@@ -795,36 +1115,6 @@ static const char*const kParameterItemLocationID
 static const char*const kParameterItemName  =
     "item_name";
 
-/// The list in which the item was presented to the user (string).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterItemList, "Search Results"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterItemList, "Search Results"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-///
-/// <b>This constant has been deprecated. Use @c FirebaseAnalytics.ParameterItemListName constant instead.</b>
-static const char*const kParameterItemList  =
-    "item_list";
-
 /// Item variant (string).
 ///
 ///
@@ -853,6 +1143,37 @@ static const char*const kParameterItemList  =
 static const char*const kParameterItemVariant  =
     "item_variant";
 
+/// The list of items involved in the transaction. (NSArray).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    kParameterItems : @[
+///      @{Parameter(kParameterItemName, "jeggings", kParameterItemCategory : "pants"}),
+///      @{Parameter(kParameterItemName, "boots", kParameterItemCategory : "shoes"}),
+///    ],
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///    FirebaseAnalytics.ParameterItems : @[
+///      @{Parameter(FirebaseAnalytics.ParameterItemName, "jeggings", FirebaseAnalytics.ParameterItemCategory : "pants"}),
+///      @{Parameter(FirebaseAnalytics.ParameterItemName, "boots", FirebaseAnalytics.ParameterItemCategory : "shoes"}),
+///    ],
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterItems  = "items";
+
 /// Level in game (signed 64-bit integer).
 ///
 ///
@@ -879,6 +1200,34 @@ static const char*const kParameterItemVariant  =
 /// @endif
 /// </SWIG>
 static const char*const kParameterLevel  = "level";
+
+/// The name of a level in a game (string).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterLevelName, "room_1"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterLevelName, "room_1"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterLevelName  =
+    "level_name";
 
 /// Location (string). The Google <a href="https://developers.google.com/places/place-id">Place ID
 /// </a> that corresponds to the associated event. Alternatively, you can supply your own custom
@@ -910,6 +1259,65 @@ static const char*const kParameterLevel  = "level";
 static const char*const kParameterLocation  =
     "location";
 
+/// The location associated with the event. Preferred to be the Google
+/// <a href="https://developers.google.com/places/place-id">Place ID</a> that corresponds to the
+/// associated item but could be overridden to a custom location ID
+/// string.(string).
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterLocationID, "ChIJiyj437sx3YAR9kUWC8QkLzQ"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterLocationID, "ChIJiyj437sx3YAR9kUWC8QkLzQ"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterLocationID  =
+    "location_id";
+
+/// Marketing Tactic (string). Used to identify the targeting criteria
+/// applied to a specific campaign.
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterMarketingTactic, "Remarketing"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterMarketingTactic, "Remarketing"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterMarketingTactic
+     = "marketing_tactic";
+
 /// The advertising or marParameter(keting, cpc, banner, email), push.
 /// Highly recommended (string).
 ///
@@ -937,6 +1345,34 @@ static const char*const kParameterLocation  =
 /// @endif
 /// </SWIG>
 static const char*const kParameterMedium  = "medium";
+
+/// A particular approach used in an operation; for example, "facebook" or
+/// "email" in the context of a sign_up or login event.  (string).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterMethod, "google"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterMethod, "google"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterMethod  = "method";
 
 /// Number of nights staying at hotel (signed 64-bit integer).
 ///
@@ -1049,6 +1485,34 @@ static const char*const kParameterNumberOfRooms  =
 /// </SWIG>
 static const char*const kParameterOrigin  = "origin";
 
+/// The chosen method of payment (string).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterPaymentType, "Visa"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterPaymentType, "Visa"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterPaymentType  =
+    "payment_type";
+
 /// Purchase price (double).
 ///
 ///
@@ -1077,6 +1541,62 @@ static const char*const kParameterOrigin  = "origin";
 /// @endif
 /// </SWIG>
 static const char*const kParameterPrice  = "price";
+
+/// The ID of a product promotion (string).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterPromotionID, "ABC123"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterPromotionID, "ABC123"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterPromotionID  =
+    "promotion_id";
+
+/// The name of a product promotion (string).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterPromotionName, "Summer Sale"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterPromotionName, "Summer Sale"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterPromotionName  =
+    "promotion_name";
 
 /// Purchase quantity (signed 64-bit integer).
 ///
@@ -1247,6 +1767,35 @@ static const char*const kParameterSearchTerm  =
 static const char*const kParameterShipping  =
     "shipping";
 
+/// The shipping tier (e.g. Ground, Air, Next-day) selected for delivery
+/// of the purchased item (string).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterShippingTier, "Ground"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterShippingTier, "Ground"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterShippingTier  =
+    "shipping_tier";
+
 /// Sign up method (string).
 ///
 ///
@@ -1278,34 +1827,6 @@ static const char*const kParameterShipping  =
 static const char*const kParameterSignUpMethod  =
     "sign_up_method";
 
-/// A particular approach used in an operation; for example, "facebook" or
-/// "email" in the context of a sign_up or login event.  (string).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterMethod, "google"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterMethod, "google"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterMethod  = "method";
-
 /// The origin of your traffic, such as an Ad network (for example,
 /// google) or partner (urban airship). Identify the advertiser, site,
 /// publication, etc. that is sending traffic to your property. Highly
@@ -1336,6 +1857,37 @@ static const char*const kParameterMethod  = "method";
 /// </SWIG>
 static const char*const kParameterSource  = "source";
 
+/// Source Platform (string). Used to identify the platform responsible
+/// for directing traffic to a given Analytics property (e.g., a buying
+/// platform where budgets, targeting criteria, etc. are set, a platform
+/// for managing organic traffic data, etc.).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterSourcePlatform, "sa360"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterSourcePlatform, "sa360"),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterSourcePlatform  =
+    "source_platform";
+
 /// The departure date, check-in date or rental start date for the item.
 /// This should be in YYYY-MM-DD format (string).
 ///
@@ -1364,6 +1916,34 @@ static const char*const kParameterSource  = "source";
 /// </SWIG>
 static const char*const kParameterStartDate  =
     "start_date";
+
+/// The result of an operation. Specify 1 to indicate success and 0 to
+/// indicate failure (unsigned integer).
+///
+///
+/// @if cpp_examples
+/// @code{.cpp}
+/// using namespace firebase::analytics;
+/// Parameter parameters[] = {
+///    Parameter(kParameterSuccess, 1),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// <SWIG>
+/// @if swig_examples
+/// @code{.cs}
+/// using Firebase.Analytics;
+/// Parameter parameters[] = {
+///   new Parameter(FirebaseAnalytics.ParameterSuccess, 1),
+///    // ...
+///  };
+/// @endcode
+///
+/// @endif
+/// </SWIG>
+static const char*const kParameterSuccess  = "success";
 
 /// Tax cost associated with a transaction (double).
 ///
@@ -1546,467 +2126,6 @@ static const char*const kParameterValue  = "value";
 /// </SWIG>
 static const char*const kParameterVirtualCurrencyName
      = "virtual_currency_name";
-
-/// The name of a level in a game (string).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterLevelName, "room_1"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterLevelName, "room_1"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterLevelName  =
-    "level_name";
-
-/// The result of an operation. Specify 1 to indicate success and 0 to
-/// indicate failure (unsigned integer).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterSuccess, 1),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterSuccess, 1),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterSuccess  = "success";
-
-/// Indicates that the associated event should either extend the current
-/// session or start a new session if no session was active when the event
-/// was logged. Specify YES to extend the current session or to start a
-/// new session; any other value will not extend or start a session.
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterExtendSession, @YES),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterExtendSession, @YES),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterExtendSession  =
-    "extend_session";
-
-/// Monetary value of discount associated with a purchase (double).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterDiscount, 2.0),
-///    Parameter(kParameterCurrency, "USD"),  // e.g. $2.00 USD
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterDiscount, 2.0),
-///   new Parameter(FirebaseAnalytics.ParameterCurrency, "USD"),  // e.g. $2.00 USD
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterDiscount  =
-    "discount";
-
-/// Item Category (context-specific) (string).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterItemCategory2, "pants"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterItemCategory2, "pants"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterItemCategory2  =
-    "item_category2";
-
-/// Item Category (context-specific) (string).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterItemCategory3, "pants"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterItemCategory3, "pants"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterItemCategory3  =
-    "item_category3";
-
-/// Item Category (context-specific) (string).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterItemCategory4, "pants"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterItemCategory4, "pants"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterItemCategory4  =
-    "item_category4";
-
-/// Item Category (context-specific) (string).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterItemCategory5, "pants"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterItemCategory5, "pants"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterItemCategory5  =
-    "item_category5";
-
-/// The ID of the list in which the item was presented to the
-/// user (string).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterItemListID, "ABC123"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterItemListID, "ABC123"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterItemListID  =
-    "item_list_id";
-
-/// The name of the list in which the item was presented to the user
-/// (string).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterItemListName, "Related products"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterItemListName, "Related products"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterItemListName  =
-    "item_list_name";
-
-/// The list of items involved in the transaction. (NSArray).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    kParameterItems : @[
-///      @{Parameter(kParameterItemName, "jeggings", kParameterItemCategory : "pants"}),
-///      @{Parameter(kParameterItemName, "boots", kParameterItemCategory : "shoes"}),
-///    ],
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///    FirebaseAnalytics.ParameterItems : @[
-///      @{Parameter(FirebaseAnalytics.ParameterItemName, "jeggings", FirebaseAnalytics.ParameterItemCategory : "pants"}),
-///      @{Parameter(FirebaseAnalytics.ParameterItemName, "boots", FirebaseAnalytics.ParameterItemCategory : "shoes"}),
-///    ],
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterItems  = "items";
-
-/// The location associated with the event. Preferred to be the Google
-/// <a href="https://developers.google.com/places/place-id">Place ID</a> that corresponds to the
-/// associated item but could be overridden to a custom location ID
-/// string.(string).
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterLocationID, "ChIJiyj437sx3YAR9kUWC8QkLzQ"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterLocationID, "ChIJiyj437sx3YAR9kUWC8QkLzQ"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterLocationID  =
-    "location_id";
-
-/// The chosen method of payment (string).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterPaymentType, "Visa"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterPaymentType, "Visa"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterPaymentType  =
-    "payment_type";
-
-/// The ID of a product promotion (string).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterPromotionID, "ABC123"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterPromotionID, "ABC123"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterPromotionID  =
-    "promotion_id";
-
-/// The name of a product promotion (string).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterPromotionName, "Summer Sale"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterPromotionName, "Summer Sale"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterPromotionName  =
-    "promotion_name";
-
-/// The shipping tier (e.g. Ground, Air, Next-day) selected for delivery
-/// of the purchased item (string).
-///
-///
-/// @if cpp_examples
-/// @code{.cpp}
-/// using namespace firebase::analytics;
-/// Parameter parameters[] = {
-///    Parameter(kParameterShippingTier, "Ground"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// <SWIG>
-/// @if swig_examples
-/// @code{.cs}
-/// using Firebase.Analytics;
-/// Parameter parameters[] = {
-///   new Parameter(FirebaseAnalytics.ParameterShippingTier, "Ground"),
-///    // ...
-///  };
-/// @endcode
-///
-/// @endif
-/// </SWIG>
-static const char*const kParameterShippingTier  =
-    "shipping_tier";
 /// @}
 
 }  // namespace analytics
