@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google
+ * Copyright 2018 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef FIREBASE_FIRESTORE_CLIENT_CPP_SRC_INCLUDE_FIREBASE_FIRESTORE_SETTINGS_H_
-#define FIREBASE_FIRESTORE_CLIENT_CPP_SRC_INCLUDE_FIREBASE_FIRESTORE_SETTINGS_H_
+#ifndef FIREBASE_FIRESTORE_SRC_INCLUDE_FIREBASE_FIRESTORE_SETTINGS_H_
+#define FIREBASE_FIRESTORE_SRC_INCLUDE_FIREBASE_FIRESTORE_SETTINGS_H_
 
 #if defined(__OBJC__)
 #include <dispatch/dispatch.h>
@@ -29,7 +29,7 @@
 namespace firebase {
 namespace firestore {
 
-#if !defined(__ANDROID__) && !defined(FIRESTORE_STUB_BUILD)
+#if !defined(__ANDROID__)
 // <SWIG>
 // This declaration is guarded by a preprocessor macro because it causes
 // problems with name lookup on Android. Android implementation of the public
@@ -220,7 +220,7 @@ class Settings final {
   // TODO(varconst): fix Android problems and make these declarations
   // unconditional.
   // </SWIG>
-#if !defined(__ANDROID__) && !defined(FIRESTORE_STUB_BUILD)
+#if !defined(__ANDROID__)
   friend class FirestoreInternal;
   std::unique_ptr<util::Executor> CreateExecutor() const;
 
@@ -228,7 +228,20 @@ class Settings final {
 #endif
 };
 
+/** Checks `lhs` and `rhs` for equality. */
+inline bool operator==(const Settings& lhs, const Settings& rhs) {
+  return lhs.host() == rhs.host() &&
+         lhs.is_ssl_enabled() == rhs.is_ssl_enabled() &&
+         lhs.is_persistence_enabled() == rhs.is_persistence_enabled() &&
+         lhs.cache_size_bytes() == rhs.cache_size_bytes();
+}
+
+/** Checks `lhs` and `rhs` for inequality. */
+inline bool operator!=(const Settings& lhs, const Settings& rhs) {
+  return !(lhs == rhs);
+}
+
 }  // namespace firestore
 }  // namespace firebase
 
-#endif  // FIREBASE_FIRESTORE_CLIENT_CPP_SRC_INCLUDE_FIREBASE_FIRESTORE_SETTINGS_H_
+#endif  // FIREBASE_FIRESTORE_SRC_INCLUDE_FIREBASE_FIRESTORE_SETTINGS_H_

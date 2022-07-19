@@ -14,19 +14,15 @@
  * limitations under the License.
  */
 
-#ifndef FIREBASE_APP_CLIENT_CPP_SRC_INCLUDE_GOOGLE_PLAY_SERVICES_AVAILABILITY_H_
-#define FIREBASE_APP_CLIENT_CPP_SRC_INCLUDE_GOOGLE_PLAY_SERVICES_AVAILABILITY_H_
+#ifndef FIREBASE_APP_SRC_INCLUDE_GOOGLE_PLAY_SERVICES_AVAILABILITY_H_
+#define FIREBASE_APP_SRC_INCLUDE_GOOGLE_PLAY_SERVICES_AVAILABILITY_H_
 
 #if defined(__ANDROID__) || defined(DOXYGEN)
 
 #if !defined(SWIG_BUILD)
 #include <jni.h>
 #endif
-#include "app/src/include/firebase/future.h"
-
-#if !defined(FIREBASE_NAMESPACE)
-#define FIREBASE_NAMESPACE firebase
-#endif
+#include "firebase/future.h"
 
 /// @brief Google Play services APIs included with the Firebase C++ SDK.
 /// These APIs are Android-specific.
@@ -77,7 +73,7 @@ Availability CheckAvailability(JNIEnv* env, jobject activity);
 /// services are now available, or nonzero if still unavailable.
 ///
 /// @note This function is Android-specific.
-::FIREBASE_NAMESPACE::Future<void> MakeAvailable(JNIEnv* env, jobject activity);
+::firebase::Future<void> MakeAvailable(JNIEnv* env, jobject activity);
 
 /// @brief Get the future result from the most recent call to MakeAvailable().
 ///
@@ -88,10 +84,10 @@ Availability CheckAvailability(JNIEnv* env, jobject activity);
 /// @see MakeAvailable()
 ///
 /// @note This function is Android-specific.
-::FIREBASE_NAMESPACE::Future<void> MakeAvailableLastResult();
+::firebase::Future<void> MakeAvailableLastResult();
 
 }  // namespace google_play_services
 
 #endif  // defined(__ANDROID__) || defined(DOXYGEN)
 
-#endif  // FIREBASE_APP_CLIENT_CPP_SRC_INCLUDE_GOOGLE_PLAY_SERVICES_AVAILABILITY_H_
+#endif  // FIREBASE_APP_SRC_INCLUDE_GOOGLE_PLAY_SERVICES_AVAILABILITY_H_

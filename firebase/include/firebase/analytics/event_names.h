@@ -1,4 +1,4 @@
-// Copyright 2021 Google Inc. All Rights Reserved.
+// Copyright 2022 Google Inc. All Rights Reserved.
 
 #ifndef FIREBASE_ANALYTICS_CLIENT_CPP_INCLUDE_FIREBASE_ANALYTICS_EVENT_NAMES_H_
 #define FIREBASE_ANALYTICS_CLIENT_CPP_INCLUDE_FIREBASE_ANALYTICS_EVENT_NAMES_H_
@@ -27,6 +27,22 @@ namespace analytics {
 /// @{
 
 
+/// Ad Impression event. This event signifies when a user sees an ad
+/// impression. Note: If you supply the @c kParameterValue parameter, you
+/// must also supply the @c kParameterCurrency parameter so that revenue
+/// metrics can be computed accurately. Params:
+///
+/// <ul>
+///  <li>@c kParameterAdPlatform (string) (optional)</li>
+///  <li>@c kParameterAdFormat (string) (optional)</li>
+///  <li>@c kParameterAdSource (string) (optional)</li>
+///  <li>@c kParameterAdUnitName (string) (optional)</li>
+///  <li>@c kParameterCurrency (string) (optional)</li>
+///  <li>@c kParameterValue (double) (optional)</li>
+/// </ul>
+static const char*const kEventAdImpression  =
+    "ad_impression";
+
 /// Add Payment Info event. This event signifies that a user has submitted
 /// their payment information. Note: If you supply the @c kParameterValue
 /// parameter, you must also supply the @c kParameterCurrency parameter so
@@ -41,6 +57,22 @@ namespace analytics {
 /// </ul>
 static const char*const kEventAddPaymentInfo  =
     "add_payment_info";
+
+/// Add Shipping Info event. This event signifies that a user has
+/// submitted their shipping information. Note: If you supply the @c
+/// kParameterValue parameter, you must also supply the @c
+/// kParameterCurrency parameter so that revenue metrics can be computed
+/// accurately. Params:
+///
+/// <ul>
+///  <li>@c kParameterCoupon (string) (optional)</li>
+///  <li>@c kParameterCurrency (string) (optional)</li>
+///  <li>@c kParameterItems (NSArray) (optional)</li>
+///  <li>@c kParameterShippingTier (string) (optional)</li>
+///  <li>@c kParameterValue (double) (optional)</li>
+/// </ul>
+static const char*const kEventAddShippingInfo  =
+    "add_shipping_info";
 
 /// E-Commerce Add To Cart event. This event signifies that an item(s) was
 /// added to a cart for purchase. Add this event to a funnel with @c
@@ -69,22 +101,6 @@ static const char*const kEventAddToCart  = "add_to_cart";
 /// </ul>
 static const char*const kEventAddToWishlist  =
     "add_to_wishlist";
-
-/// Ad Impression event. This event signifies when a user sees an ad
-/// impression. Note: If you supply the @c kParameterValue parameter, you
-/// must also supply the @c kParameterCurrency parameter so that revenue
-/// metrics can be computed accurately. Params:
-///
-/// <ul>
-///  <li>@c kParameterAdPlatform (string) (optional)</li>
-///  <li>@c kParameterAdFormat (string) (optional)</li>
-///  <li>@c kParameterAdSource (string) (optional)</li>
-///  <li>@c kParameterAdUnitName (string) (optional)</li>
-///  <li>@c kParameterCurrency (string) (optional)</li>
-///  <li>@c kParameterValue (double) (optional)</li>
-/// </ul>
-static const char*const kEventAdImpression  =
-    "ad_impression";
 
 /// App Open event. By logging this event when an App becomes active,
 /// developers can understand how often users leave and return during the
@@ -122,6 +138,10 @@ static const char*const kEventBeginCheckout  =
 ///  <li>@c kParameterContent (string) (optional)</li>
 ///  <li>@c kParameterAdNetworkClickID (string) (optional)</li>
 ///  <li>@c kParameterCP1 (string) (optional)</li>
+///  <li>@c kParameterCampaignID (string) (optional)</li>
+///  <li>@c kParameterCreativeFormat (string) (optional)</li>
+///  <li>@c kParameterMarketingTactic (string) (optional)</li>
+///  <li>@c kParameterSourcePlatform (string) (optional)</li>
 /// </ul>
 static const char*const kEventCampaignDetails  =
     "campaign_details";
@@ -266,6 +286,25 @@ static const char*const kEventPostScore  = "post_score";
 static const char*const kEventPresentOffer  =
     "present_offer";
 
+/// E-Commerce Purchase event. This event signifies that an item(s) was
+/// purchased by a user. Note: This is different from the in-app purchase
+/// event, which is reported automatically for App Store-based apps. Note:
+/// If you supply the @c kParameterValue parameter, you must also supply
+/// the @c kParameterCurrency parameter so that revenue metrics can be
+/// computed accurately. Params:
+///
+/// <ul>
+///  <li>@c kParameterAffiliation (string) (optional)</li>
+///  <li>@c kParameterCoupon (string) (optional)</li>
+///  <li>@c kParameterCurrency (string) (optional)</li>
+///  <li>@c kParameterItems (NSArray) (optional)</li>
+///  <li>@c kParameterShipping (double) (optional)</li>
+///  <li>@c kParameterTax (double) (optional)</li>
+///  <li>@c kParameterTransactionID (string) (optional)</li>
+///  <li>@c kParameterValue (double) (optional)</li>
+/// </ul>
+static const char*const kEventPurchase  = "purchase";
+
 /// E-Commerce Purchase Refund event. This event signifies that an item
 /// purchase was refunded. Note: If you supply the @c kParameterValue
 /// parameter, you must also supply the @c kParameterCurrency parameter so
@@ -279,6 +318,23 @@ static const char*const kEventPresentOffer  =
 /// <b>This constant has been deprecated. Use @c kEventRefund constant instead.</b>
 static const char*const kEventPurchaseRefund  =
     "purchase_refund";
+
+/// E-Commerce Refund event. This event signifies that a refund was
+/// issued. Note: If you supply the @c kParameterValue parameter, you must
+/// also supply the @c kParameterCurrency parameter so that revenue
+/// metrics can be computed accurately. Params:
+///
+/// <ul>
+///  <li>@c kParameterAffiliation (string) (optional)</li>
+///  <li>@c kParameterCoupon (string) (optional)</li>
+///  <li>@c kParameterCurrency (string) (optional)</li>
+///  <li>@c kParameterItems (NSArray) (optional)</li>
+///  <li>@c kParameterShipping (double) (optional)</li>
+///  <li>@c kParameterTax (double) (optional)</li>
+///  <li>@c kParameterTransactionID (string) (optional)</li>
+///  <li>@c kParameterValue (double) (optional)</li>
+/// </ul>
+static const char*const kEventRefund  = "refund";
 
 /// E-Commerce Remove from Cart event. This event signifies that an
 /// item(s) was removed from a cart. Note: If you supply the @c
@@ -336,6 +392,33 @@ static const char*const kEventSearch  = "search";
 /// </ul>
 static const char*const kEventSelectContent  =
     "select_content";
+
+/// Select Item event. This event signifies that an item was selected by a
+/// user from a list. Use the appropriate parameters to contextualize the
+/// event. Use this event to discover the most popular items selected.
+/// Params:
+///
+/// <ul>
+///  <li>@c kParameterItems (NSArray) (optional)</li>
+///  <li>@c kParameterItemListID (string) (optional)</li>
+///  <li>@c kParameterItemListName (string) (optional)</li>
+/// </ul>
+static const char*const kEventSelectItem  = "select_item";
+
+/// Select promotion event. This event signifies that a user has selected
+/// a promotion offer. Use the appropriate parameters to contextualize the
+/// event, such as the item(s) for which the promotion applies. Params:
+///
+/// <ul>
+///  <li>@c kParameterCreativeName (string) (optional)</li>
+///  <li>@c kParameterCreativeSlot (string) (optional)</li>
+///  <li>@c kParameterItems (NSArray) (optional)</li>
+///  <li>@c kParameterLocationID (string) (optional)</li>
+///  <li>@c kParameterPromotionID (string) (optional)</li>
+///  <li>@c kParameterPromotionName (string) (optional)</li>
+/// </ul>
+static const char*const kEventSelectPromotion  =
+    "select_promotion";
 
 /// Set checkout option. Params:
 ///
@@ -403,6 +486,19 @@ static const char*const kEventTutorialComplete  =
 static const char*const kEventUnlockAchievement  =
     "unlock_achievement";
 
+/// E-commerce View Cart event. This event signifies that a user has
+/// viewed their cart. Use this to analyze your purchase funnel. Note: If
+/// you supply the @c kParameterValue parameter, you must also supply the
+/// @c kParameterCurrency parameter so that revenue metrics can be
+/// computed accurately. Params:
+///
+/// <ul>
+///  <li>@c kParameterCurrency (string) (optional)</li>
+///  <li>@c kParameterItems (NSArray) (optional)</li>
+///  <li>@c kParameterValue (double) (optional)</li>
+/// </ul>
+static const char*const kEventViewCart  = "view_cart";
+
 /// View Item event. This event signifies that a user has viewed an item.
 /// Use the appropriate parameters to contextualize the event. Use this
 /// event to discover the most popular items viewed in your app. Note: If
@@ -428,107 +524,6 @@ static const char*const kEventViewItem  = "view_item";
 static const char*const kEventViewItemList  =
     "view_item_list";
 
-/// View Search Results event. Log this event when the user has been
-/// presented with the results of a search. Params:
-///
-/// <ul>
-///  <li>@c kParameterSearchTerm (string)</li>
-/// </ul>
-static const char*const kEventViewSearchResults  =
-    "view_search_results";
-
-/// Add Shipping Info event. This event signifies that a user has
-/// submitted their shipping information. Note: If you supply the @c
-/// kParameterValue parameter, you must also supply the @c
-/// kParameterCurrency parameter so that revenue metrics can be computed
-/// accurately. Params:
-///
-/// <ul>
-///  <li>@c kParameterCoupon (string) (optional)</li>
-///  <li>@c kParameterCurrency (string) (optional)</li>
-///  <li>@c kParameterItems (NSArray) (optional)</li>
-///  <li>@c kParameterShippingTier (string) (optional)</li>
-///  <li>@c kParameterValue (double) (optional)</li>
-/// </ul>
-static const char*const kEventAddShippingInfo  =
-    "add_shipping_info";
-
-/// E-Commerce Purchase event. This event signifies that an item(s) was
-/// purchased by a user. Note: This is different from the in-app purchase
-/// event, which is reported automatically for App Store-based apps. Note:
-/// If you supply the @c kParameterValue parameter, you must also supply
-/// the @c kParameterCurrency parameter so that revenue metrics can be
-/// computed accurately. Params:
-///
-/// <ul>
-///  <li>@c kParameterAffiliation (string) (optional)</li>
-///  <li>@c kParameterCoupon (string) (optional)</li>
-///  <li>@c kParameterCurrency (string) (optional)</li>
-///  <li>@c kParameterItems (NSArray) (optional)</li>
-///  <li>@c kParameterShipping (double) (optional)</li>
-///  <li>@c kParameterTax (double) (optional)</li>
-///  <li>@c kParameterTransactionID (string) (optional)</li>
-///  <li>@c kParameterValue (double) (optional)</li>
-/// </ul>
-static const char*const kEventPurchase  = "purchase";
-
-/// E-Commerce Refund event. This event signifies that a refund was
-/// issued. Note: If you supply the @c kParameterValue parameter, you must
-/// also supply the @c kParameterCurrency parameter so that revenue
-/// metrics can be computed accurately. Params:
-///
-/// <ul>
-///  <li>@c kParameterAffiliation (string) (optional)</li>
-///  <li>@c kParameterCoupon (string) (optional)</li>
-///  <li>@c kParameterCurrency (string) (optional)</li>
-///  <li>@c kParameterItems (NSArray) (optional)</li>
-///  <li>@c kParameterShipping (double) (optional)</li>
-///  <li>@c kParameterTax (double) (optional)</li>
-///  <li>@c kParameterTransactionID (string) (optional)</li>
-///  <li>@c kParameterValue (double) (optional)</li>
-/// </ul>
-static const char*const kEventRefund  = "refund";
-
-/// Select Item event. This event signifies that an item was selected by a
-/// user from a list. Use the appropriate parameters to contextualize the
-/// event. Use this event to discover the most popular items selected.
-/// Params:
-///
-/// <ul>
-///  <li>@c kParameterItems (NSArray) (optional)</li>
-///  <li>@c kParameterItemListID (string) (optional)</li>
-///  <li>@c kParameterItemListName (string) (optional)</li>
-/// </ul>
-static const char*const kEventSelectItem  = "select_item";
-
-/// Select promotion event. This event signifies that a user has selected
-/// a promotion offer. Use the appropriate parameters to contextualize the
-/// event, such as the item(s) for which the promotion applies. Params:
-///
-/// <ul>
-///  <li>@c kParameterCreativeName (string) (optional)</li>
-///  <li>@c kParameterCreativeSlot (string) (optional)</li>
-///  <li>@c kParameterItems (NSArray) (optional)</li>
-///  <li>@c kParameterLocationID (string) (optional)</li>
-///  <li>@c kParameterPromotionID (string) (optional)</li>
-///  <li>@c kParameterPromotionName (string) (optional)</li>
-/// </ul>
-static const char*const kEventSelectPromotion  =
-    "select_promotion";
-
-/// E-commerce View Cart event. This event signifies that a user has
-/// viewed their cart. Use this to analyze your purchase funnel. Note: If
-/// you supply the @c kParameterValue parameter, you must also supply the
-/// @c kParameterCurrency parameter so that revenue metrics can be
-/// computed accurately. Params:
-///
-/// <ul>
-///  <li>@c kParameterCurrency (string) (optional)</li>
-///  <li>@c kParameterItems (NSArray) (optional)</li>
-///  <li>@c kParameterValue (double) (optional)</li>
-/// </ul>
-static const char*const kEventViewCart  = "view_cart";
-
 /// View Promotion event. This event signifies that a promotion was shown
 /// to a user. Add this event to a funnel with the @c kEventAddToCart and
 /// @c kEventPurchase to gauge your conversion process. Params:
@@ -543,6 +538,15 @@ static const char*const kEventViewCart  = "view_cart";
 /// </ul>
 static const char*const kEventViewPromotion  =
     "view_promotion";
+
+/// View Search Results event. Log this event when the user has been
+/// presented with the results of a search. Params:
+///
+/// <ul>
+///  <li>@c kParameterSearchTerm (string)</li>
+/// </ul>
+static const char*const kEventViewSearchResults  =
+    "view_search_results";
 /// @}
 
 }  // namespace analytics
