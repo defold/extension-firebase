@@ -7,6 +7,14 @@
     type: function
     desc: Initialise Firebase
 
+    parameters:
+    - name: options
+      optional: true
+      type: table
+      desc: Optional table with initialisation parameters to use instead of those specified in google-services.xml/plist 
+            When passing this, disable creation of the default Firebase App by specifying firebase.no_auto_init in game.project
+            Valid keys in the table are api_key, app_id, database_url, messaging_sender_id, project_id, storage_bucket. All values are strings.
+
     return:
     - name: success
       type: boolean
