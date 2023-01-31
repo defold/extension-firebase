@@ -16,6 +16,41 @@ static dmScript::LuaCallbackInfo* g_InstallationAuthTokenCallback;
 
 using namespace firebase;
 
+static void ReadAppOptions(lua_State* L, AppOptions& options)
+{
+	luaL_checktype(L, 1, LUA_TTABLE);
+	lua_pushvalue(L, 1);
+	lua_pushnil(L);
+	while (lua_next(L, -2)) {
+		const char* attr = lua_tostring(L, -2);
+		if (strcmp(attr, "api_key") == 0)
+		{
+			options.set_api_key(luaL_checkstring(L, -1));
+		}
+		else if (strcmp(attr, "app_id") == 0)
+		{
+			options.set_app_id(luaL_checkstring(L, -1));
+		}
+		else if (strcmp(attr, "database_url") == 0)
+		{
+			options.set_database_url(luaL_checkstring(L, -1));
+		}
+		else if (strcmp(attr, "messaging_sender_id") == 0)
+		{
+			options.set_messaging_sender_id(luaL_checkstring(L, -1));
+		}
+		else if (strcmp(attr, "project_id") == 0)
+		{
+			options.set_project_id(luaL_checkstring(L, -1));
+		}
+		else if (strcmp(attr, "storage_bucket") == 0)
+		{
+			options.set_storage_bucket(luaL_checkstring(L, -1));
+		}
+		lua_pop(L, 1);
+	}
+	lua_pop(L, 1);
+}
 
 static int Firebase_Init(lua_State* L) {
 	DM_LUA_STACK_CHECK(L, 2);
@@ -27,9 +62,28 @@ static int Firebase_Init(lua_State* L) {
 #if defined(DM_PLATFORM_ANDROID)
 	JNIEnv* env = 0;
 	dmGraphics::GetNativeAndroidJavaVM()->AttachCurrentThread(&env, NULL);
-	firebase_app_ = App::Create(env, dmGraphics::GetNativeAndroidActivity());
+	
+	if (lua_isnil(L, 1))
+	{
+		firebase_app_ = App::Create(env, dmGraphics::GetNativeAndroidActivity());
+	}
+	else
+	{
+		AppOptions options;
+		ReadAppOptions(L, options);
+		firebase_app_ = App::Create(options, env, dmGraphics::GetNativeAndroidActivity());
+	}
 #else
-	firebase_app_ = App::Create();
+	if (lua_isnil(L, 1))
+	{
+		firebase_app_ = App::Create();
+	}
+	else
+	{
+		AppOptions options;
+		ReadAppOptions(L, options);
+		firebase_app_ = App::Create(options);
+	}
 #endif
 
 	if(!firebase_app_)
