@@ -63,7 +63,7 @@ static int Firebase_Init(lua_State* L) {
 	JNIEnv* env = 0;
 	dmGraphics::GetNativeAndroidJavaVM()->AttachCurrentThread(&env, NULL);
 	
-	if (lua_isnil(L, 1))
+	if (lua_isnoneornil(L, 1))
 	{
 		firebase_app_ = App::Create(env, dmGraphics::GetNativeAndroidActivity());
 	}
@@ -74,7 +74,7 @@ static int Firebase_Init(lua_State* L) {
 		firebase_app_ = App::Create(options, env, dmGraphics::GetNativeAndroidActivity());
 	}
 #else
-	if (lua_isnil(L, 1))
+	if (lua_isnoneornil(L, 1))
 	{
 		firebase_app_ = App::Create();
 	}
