@@ -54,7 +54,6 @@ static void ReadAppOptions(lua_State* L, AppOptions& options)
 
 static int Firebase_Init(lua_State* L) {
 	DM_LUA_STACK_CHECK(L, 2);
-	int argc = lua_gettop(L);
 
 #if defined (DM_DEBUG)
 	FIR_PlatformDebugInit();
@@ -64,7 +63,7 @@ static int Firebase_Init(lua_State* L) {
 	JNIEnv* env = 0;
 	dmGraphics::GetNativeAndroidJavaVM()->AttachCurrentThread(&env, NULL);
 	
-	if (argc == 0)
+	if (lua_isnoneornil(L, 1))
 	{
 		firebase_app_ = App::Create(env, dmGraphics::GetNativeAndroidActivity());
 	}
@@ -75,7 +74,7 @@ static int Firebase_Init(lua_State* L) {
 		firebase_app_ = App::Create(options, env, dmGraphics::GetNativeAndroidActivity());
 	}
 #else
-	if (argc == 0)
+	if (lua_isnoneornil(L, 1))
 	{
 		firebase_app_ = App::Create();
 	}
