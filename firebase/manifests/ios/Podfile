@@ -1,0 +1,2 @@
+pod 'FirebaseCore', '8.13.0'
+pod 'FirebaseInstallations', '8.13.0'
