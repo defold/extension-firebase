@@ -86,8 +86,13 @@ namespace dmFirebase {
     void Initialize() {
         @try {
             if(![FIRApp defaultApp]) {
-                // TODO: options
-                [FIRApp configure];
+                if (!firOptions) {
+                    [FIRApp configure];
+                }
+                else {
+                    [FIRApp configureWithOptions:firOptions];
+                    firOptions = 0;
+                }
             }
             SendSimpleMessage(MSG_INITIALIZED);
         } @catch (NSException* e) {
@@ -102,7 +107,7 @@ namespace dmFirebase {
                 if (error != nil) {
                     SendErrorMessage(error);
                 } else {
-                    SendSimpleMessage(MSG_INSTALLATION_AUTH_TOKEN, @"id", [result authToken]);
+                    SendSimpleMessage(MSG_INSTALLATION_AUTH_TOKEN, @"token", [result authToken]);
                 }
             }];
         } @catch (NSException* e) {
