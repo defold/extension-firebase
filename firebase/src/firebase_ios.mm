@@ -36,11 +36,11 @@ namespace dmFirebase {
         }
     }
 
-	void SendErrorMessage(NSError *error) {
+    void SendErrorMessage(NSError *error) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         [dict setObject:error.localizedDescription forKey:@"error"];
-		SendSimpleMessage(MSG_ERROR, dict);
-	}
+        SendSimpleMessage(MSG_ERROR, dict);
+    }
 
     void SendSimpleMessage(Message msg) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -53,49 +53,49 @@ namespace dmFirebase {
         SendSimpleMessage(msg, dict);
     }
 
-	void Initialize_Ext() {
-		
-	}
+    void Initialize_Ext() {
+        
+    }
 
-	void Initialize() {
-		@try {
-			if(![FIRApp defaultApp]){		
-				[FIRApp configure];
-			}
-			SendSimpleMessage(MSG_INITIALIZED);
-		} @catch (NSException* e) {
-			AddToQueueCallback(MSG_ERROR, [[NSString stringWithFormat:@"{ \"error\": \"Unable to init Firebase (%1$@)\"}", e.reason] UTF8String]);
+    void Initialize() {
+        @try {
+            if(![FIRApp defaultApp]){		
+                [FIRApp configure];
+            }
+            SendSimpleMessage(MSG_INITIALIZED);
+        } @catch (NSException* e) {
+            AddToQueueCallback(MSG_ERROR, [[NSString stringWithFormat:@"{ \"error\": \"Unable to init Firebase (%1$@)\"}", e.reason] UTF8String]);
         }
-	}
+    }
 
-	void GetInstallationAuthToken() {
-		@try {
-			[[FIRInstallations installations] authTokenForcingRefresh:true
-			                                         completion:^(FIRInstallationsAuthTokenResult *result, NSError *error) {
-			    if (error != nil) {
-			    	SendErrorMessage(error);
-			    } else {
-			    	SendSimpleMessage(MSG_INSTALLATION_AUTH_TOKEN, @"id", [result authToken]);
-				}
-			}];
-		} @catch (NSException* e) {
-			AddToQueueCallback(MSG_ERROR, [[NSString stringWithFormat:@"{ \"error\": \"Unable to get auth token (%1$@)\"}", e.reason] UTF8String]);
+    void GetInstallationAuthToken() {
+        @try {
+            [[FIRInstallations installations] authTokenForcingRefresh:true
+                                                     completion:^(FIRInstallationsAuthTokenResult *result, NSError *error) {
+                if (error != nil) {
+                    SendErrorMessage(error);
+                } else {
+                    SendSimpleMessage(MSG_INSTALLATION_AUTH_TOKEN, @"id", [result authToken]);
+                }
+            }];
+        } @catch (NSException* e) {
+            AddToQueueCallback(MSG_ERROR, [[NSString stringWithFormat:@"{ \"error\": \"Unable to get auth token (%1$@)\"}", e.reason] UTF8String]);
         }
-	}
+    }
 
-	void GetInstallationId() {
-		@try {
-			[[FIRInstallations installations] installationIDWithCompletion:^(NSString *identifier, NSError *error) {
-				if (error != nil) {
-					SendErrorMessage(error);
-				} else {
-					SendSimpleMessage(MSG_INSTALLATION_ID, @"id", identifier);
-				}
-			}];		
-		} @catch (NSException* e) {
-			AddToQueueCallback(MSG_ERROR, [[NSString stringWithFormat:@"{ \"error\": \"Unable to get installation id (%1$@)\"}", e.reason] UTF8String]);
+    void GetInstallationId() {
+        @try {
+            [[FIRInstallations installations] installationIDWithCompletion:^(NSString *identifier, NSError *error) {
+                if (error != nil) {
+                    SendErrorMessage(error);
+                } else {
+                    SendSimpleMessage(MSG_INSTALLATION_ID, @"id", identifier);
+                }
+            }];		
+        } @catch (NSException* e) {
+            AddToQueueCallback(MSG_ERROR, [[NSString stringWithFormat:@"{ \"error\": \"Unable to get installation id (%1$@)\"}", e.reason] UTF8String]);
         }
-	}
+    }
 
 } // namespace dmFirebase
 

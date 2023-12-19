@@ -5,7 +5,7 @@
 namespace dmFirebase {
 
 void Initialize_Ext();
-	
+
 void Initialize();
 void GetInstallationAuthToken();
 void GetInstallationId();
