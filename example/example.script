@@ -12,6 +12,6 @@ function init(self)
                 print("ERROR:", message.error)
             end
         end)
-        firebase.init()
+        firebase.initialize()
     end
 end

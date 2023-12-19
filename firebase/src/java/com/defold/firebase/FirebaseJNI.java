@@ -45,7 +45,13 @@ public class FirebaseJNI {
 
     public boolean setOption(String key, String value) {
         if (optionsBuilder == null) {
-            optionsBuilder = new FirebaseOptions.Builder();
+            FirebaseOptions defaultOption = FirebaseOptions.fromResource(activity.getApplicationContext());
+            if (defaultOption != null) {
+                optionsBuilder = new FirebaseOptions.Builder(defaultOption);
+            }
+            else {
+                optionsBuilder = new FirebaseOptions.Builder();
+            }
         }
         switch (key) {
             case "api_key":
@@ -82,7 +88,7 @@ public class FirebaseJNI {
                     sendErrorMessage("Unable to get Installation auth token");
                 }
             }
-        });		
+        });
     }
 
     public void getInstallationId() {

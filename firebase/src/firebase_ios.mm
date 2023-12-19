@@ -1,11 +1,13 @@
 #if defined(DM_PLATFORM_IOS)
 
 #include <FirebaseInstallations/FirebaseInstallations.h>
+#import <FirebaseCore/FIROptions.h>
 
 #include "firebase_private.h"
 #include "firebase_callback.h"
 
 namespace dmFirebase {
+    FIROptions *firOptions = 0;
 
     void SendSimpleMessage(Message msg, id obj) {
         NSError* error;
@@ -58,12 +60,33 @@ namespace dmFirebase {
     }
 
     bool SetOption(const char* key, const char* value) {
-        
+        if (!firOptions) {
+            firOptions = [FIROptions defaultOptions];
+        }
+        NSString* o_key = [NSString stringWithUTF8String:key];
+        NSString* o_value = [NSString stringWithUTF8String:value];
+        if ([o_key isEqualToString:@"api_key"]) {
+            firOptions.APIKey = o_value;
+        } else if ([o_key isEqualToString:@"app_id"]) {
+            firOptions.googleAppID = o_value;
+        } else if ([o_key isEqualToString:@"database_url"]) {
+            firOptions.databaseURL = o_value;
+        } else if ([o_key isEqualToString:@"messaging_sender_id"]) {
+            firOptions.GCMSenderID = o_value;
+        } else if ([o_key isEqualToString:@"project_id"]) {
+            firOptions.projectID = o_value;
+        } else if ([o_key isEqualToString:@"storage_bucket"]) {
+            firOptions.storageBucket = o_value;
+        } else {
+            return false;
+        }
+        return true;
     }
 
     void Initialize() {
         @try {
             if(![FIRApp defaultApp]) {
+                // TODO: options
                 [FIRApp configure];
             }
             SendSimpleMessage(MSG_INITIALIZED);
