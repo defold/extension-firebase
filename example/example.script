@@ -1,5 +1,17 @@
 function init(self)
-	if firebase then
-		firebase.init()
-	end
+    if firebase then
+        firebase.set_callback(function(self, message_id, message)
+            if message_id == firebase.MSG_INITIALIZED then
+                firebase.get_installation_auth_token()
+                firebase.get_installation_id()
+            elseif message_id == firebase.MSG_INSTALLATION_ID then
+                print("id:", message.id)
+            elseif message_id == firebase.MSG_INSTALLATION_AUTH_TOKEN then
+                print("token:", message.token)
+            elseif message_id == firebase.MSG_ERROR then
+                print("ERROR:", message.error)
+            end
+        end)
+        firebase.init()
+    end
 end

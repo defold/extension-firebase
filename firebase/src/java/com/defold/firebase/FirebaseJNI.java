@@ -8,6 +8,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.installations.FirebaseInstallations;
 import com.google.firebase.installations.InstallationTokenResult;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.FirebaseApp;
 
 import org.json.JSONObject;
 import org.json.JSONException;
@@ -26,14 +28,48 @@ public class FirebaseJNI {
     private static final int MSG_INSTALLATION_ID =         3;
 
     private Activity activity;
+    
+    private FirebaseOptions.Builder optionsBuilder;
 
     public FirebaseJNI(Activity activity) {
         this.activity = activity;
     }
 
     public void initialize() {
-        // TODO do we need to call FIR init explicitly? 
+        if (optionsBuilder != null) {
+            FirebaseApp.initializeApp(activity.getApplicationContext(), optionsBuilder.build());
+            optionsBuilder = null;
+        }
         sendSimpleMessage(MSG_INITIALIZED);
+    }
+
+    public boolean setOption(String key, String value) {
+        if (optionsBuilder == null) {
+            optionsBuilder = new FirebaseOptions.Builder();
+        }
+        switch (key) {
+            case "api_key":
+                optionsBuilder.setApiKey(value);
+                break;
+            case "app_id":
+                optionsBuilder.setApplicationId(value);
+                break;
+            case "database_url":
+                optionsBuilder.setDatabaseUrl(value);
+                break;
+            case "messaging_sender_id":
+                optionsBuilder.setGcmSenderId(value);
+                break;
+            case "project_id":
+                optionsBuilder.setProjectId(value);
+                break;
+            case "storage_bucket":
+                optionsBuilder.setStorageBucket(value);
+                break;
+            default:
+                return false;
+        }
+        return true;
     }
 
     public void getInstallationAuthToken() {

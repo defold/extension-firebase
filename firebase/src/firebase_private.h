@@ -10,6 +10,8 @@ void Initialize();
 void GetInstallationAuthToken();
 void GetInstallationId();
 
+bool SetOption(const char* key, const char* value);
+
 } //namespace dmFirebase
 
 #endif

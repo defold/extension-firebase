@@ -13,16 +13,30 @@
 
 namespace dmFirebase {
 
+static void SetAppOptions(lua_State* L)
+{
+    luaL_checktype(L, 1, LUA_TTABLE);
+    lua_pushvalue(L, 1);
+    lua_pushnil(L);
+    while (lua_next(L, -2)) {
+        const char* attr = lua_tostring(L, -2);
+        bool result = SetOption(attr, luaL_checkstring(L, -1));
+        if (!result)
+        {
+            dmLogError("Invalid firebase option `%s`", attr);
+        }
+        lua_pop(L, 1);
+    }
+    lua_pop(L, 1);
+}
+
 static int Lua_Initialize(lua_State* L) {
     DM_LUA_STACK_CHECK(L, 0);
-    if (lua_isnoneornil(L, 1))
+    if (!lua_isnoneornil(L, 1))
     {
-        Initialize();
+        SetAppOptions(L);
     }
-    else
-    {
-        ReadAppOptions(L, options);
-    }
+    Initialize();
     return 0;
 }
 

@@ -57,9 +57,13 @@ namespace dmFirebase {
         
     }
 
+    bool SetOption(const char* key, const char* value) {
+        
+    }
+
     void Initialize() {
         @try {
-            if(![FIRApp defaultApp]){		
+            if(![FIRApp defaultApp]) {
                 [FIRApp configure];
             }
             SendSimpleMessage(MSG_INITIALIZED);
@@ -98,6 +102,5 @@ namespace dmFirebase {
     }
 
 } // namespace dmFirebase
-
 
 #endif // DM_PLATFORM_IOS
