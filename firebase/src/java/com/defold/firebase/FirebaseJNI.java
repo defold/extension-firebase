@@ -40,6 +40,9 @@ public class FirebaseJNI {
             FirebaseApp.initializeApp(activity.getApplicationContext(), optionsBuilder.build());
             optionsBuilder = null;
         }
+        else if (FirebaseApp.getApps().size() == 0) {
+            FirebaseApp.initializeApp(activity.getApplicationContext());
+        }
         sendSimpleMessage(MSG_INITIALIZED);
     }
 
