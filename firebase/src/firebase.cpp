@@ -2,14 +2,13 @@
 #define LIB_NAME "Firebase"
 #define MODULE_NAME "firebase"
 
-#define DLIB_LOG_DOMAIN LIB_NAME
 #include <dmsdk/dlib/log.h>
 #include <dmsdk/sdk.h>
 
 #include "firebase_private.h"
 #include "firebase_callback.h"
 
-#if defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS)
+#if defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS) || defined(DM_PLATFORM_MACOS)
 
 namespace dmFirebase {
 

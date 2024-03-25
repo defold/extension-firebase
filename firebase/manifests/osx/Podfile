@@ -1,0 +1,4 @@
+platform :osx '10.15'
+
+pod 'FirebaseCore', '10.22.0'
+pod 'FirebaseInstallations', '10.22.0'
