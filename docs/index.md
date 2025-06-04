@@ -115,7 +115,3 @@ It is possible to override the values within GoogleService-Info.plist/google-ser
 ## Source code
 
 The source code is available on [GitHub](https://github.com/defold/extension-firebase)
-
-
-
-## API reference
