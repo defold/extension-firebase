@@ -1,3 +1,14 @@
+local function log(...)
+    print(...)
+    local text = label.get_text("#label")
+    text = text .. "\n"
+    local args = {...}
+    for i, v in ipairs(args) do
+        text = text .. v
+    end
+    label.set_text("#label", text)
+end
+
 function init(self)
     if firebase then
         firebase.set_callback(function(self, message_id, message)
@@ -5,11 +16,11 @@ function init(self)
                 firebase.get_installation_auth_token()
                 firebase.get_installation_id()
             elseif message_id == firebase.MSG_INSTALLATION_ID then
-                print("id:", message.id)
+                log("id:", message.id)
             elseif message_id == firebase.MSG_INSTALLATION_AUTH_TOKEN then
-                print("token:", message.token)
+                log("token:", message.token)
             elseif message_id == firebase.MSG_ERROR then
-                print("ERROR:", message.error)
+                log("ERROR:", message.error)
             end
         end)
         firebase.initialize()

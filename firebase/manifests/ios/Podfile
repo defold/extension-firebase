@@ -1,4 +1,4 @@
-platform :ios '11.0'
+platform :ios '13.0'
 
-pod 'FirebaseCore', '10.22.0'
-pod 'FirebaseInstallations', '10.22.0'
+pod 'FirebaseCore', '11.15.0'
+pod 'FirebaseInstallations', '11.15.0'
