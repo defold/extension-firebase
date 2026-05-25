@@ -1,4 +1,4 @@
-#if defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS)
+#if defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS) || defined(DM_PLATFORM_OSX)
 #pragma once
 
 #include <dmsdk/sdk.h>
@@ -28,4 +28,4 @@ void AddToQueueCallback(Message type, const char* json);
 
 } //namespace dmFirebase
 
-#endif // defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS)
+#endif // defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS) || defined(DM_PLATFORM_OSX)

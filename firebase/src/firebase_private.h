@@ -1,4 +1,4 @@
-#if defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS)
+#if defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS) || defined(DM_PLATFORM_OSX)
 
 #pragma once
 
@@ -15,4 +15,3 @@ bool SetOption(const char* key, const char* value);
 } //namespace dmFirebase
 
 #endif
-

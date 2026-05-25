@@ -9,12 +9,19 @@ local function log(...)
     label.set_text("#label", text)
 end
 
+local function supports_firebase_installations()
+    local system_name = sys.get_sys_info().system_name
+    return system_name == "Android" or system_name == "iPhone OS"
+end
+
 function init(self)
     if firebase then
         firebase.set_callback(function(self, message_id, message)
             if message_id == firebase.MSG_INITIALIZED then
-                firebase.get_installation_auth_token()
-                firebase.get_installation_id()
+                if supports_firebase_installations() then
+                    firebase.get_installation_auth_token()
+                    firebase.get_installation_id()
+                end
             elseif message_id == firebase.MSG_INSTALLATION_ID then
                 log("id:", message.id)
             elseif message_id == firebase.MSG_INSTALLATION_AUTH_TOKEN then

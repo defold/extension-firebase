@@ -1,4 +1,4 @@
-#if defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS)
+#if defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS) || defined(DM_PLATFORM_OSX)
 
 #include "firebase_callback.h"
 #include <stdlib.h>
@@ -111,4 +111,4 @@ void UpdateCallback()
 
 } //namespace dmFirebase
 
-#endif //defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS)
+#endif //defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS) || defined(DM_PLATFORM_OSX)

@@ -4,3 +4,7 @@ platforms:
   android:
     context:
       aaptExtraPackages: ['com.google.android.gms.common']
+  osx:
+    context:
+      frameworks: ["Foundation"]
+      linkFlags: ["-ObjC"]

@@ -9,7 +9,7 @@
 #include "firebase_private.h"
 #include "firebase_callback.h"
 
-#if defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS)
+#if defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS) || defined(DM_PLATFORM_OSX)
 
 namespace dmFirebase {
 
@@ -123,7 +123,7 @@ dmExtension::Result UpdateFirebaseExtension(dmExtension::Params* params) {
 
 DM_DECLARE_EXTENSION(EXTENSION_NAME, LIB_NAME, dmFirebase::AppInitializeFirebaseExtension, dmFirebase::AppFinalizeFirebaseExtension, dmFirebase::InitializeFirebaseExtension, dmFirebase::UpdateFirebaseExtension, 0, dmFirebase::FinalizeFirebaseExtension)
 
-#else // defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS) 
+#else // defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS) || defined(DM_PLATFORM_OSX)
 
 //-------------------- Not supported for other platforms --------------------//
 
@@ -140,5 +140,4 @@ static dmExtension::Result FinalizeFirebase(dmExtension::Params* params)
 
 DM_DECLARE_EXTENSION(EXTENSION_NAME, LIB_NAME, 0, 0, InitializeFirebase, 0, 0, FinalizeFirebase)
 
-#endif // defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS) 
-
+#endif // defined(DM_PLATFORM_ANDROID) || defined(DM_PLATFORM_IOS) || defined(DM_PLATFORM_OSX)

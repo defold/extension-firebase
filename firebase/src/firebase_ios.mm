@@ -1,6 +1,11 @@
-#if defined(DM_PLATFORM_IOS)
+#if defined(DM_PLATFORM_IOS) || defined(DM_PLATFORM_OSX)
 
+#ifndef DLIB_LOG_DOMAIN
+#define DLIB_LOG_DOMAIN "Firebase"
+#endif
+#include <dmsdk/dlib/log.h>
 #include <FirebaseInstallations/FirebaseInstallations.h>
+#import <FirebaseCore/FirebaseCore.h>
 #import <FirebaseCore/FIROptions.h>
 
 #include "firebase_private.h"
@@ -8,6 +13,59 @@
 
 namespace dmFirebase {
     FIROptions *firOptions = 0;
+
+#if defined(DM_DEBUG)
+    static void AddExistingPath(NSMutableArray* paths, NSString* path) {
+        if (path && ![paths containsObject:path])
+        {
+            [paths addObject:path];
+        }
+    }
+
+    static NSString* FindGoogleServiceInfoPlist() {
+        NSBundle* bundle = [NSBundle mainBundle];
+        NSFileManager* file_manager = [NSFileManager defaultManager];
+        NSMutableArray* paths = [NSMutableArray array];
+
+        AddExistingPath(paths, [bundle pathForResource:@"GoogleService-Info" ofType:@"plist"]);
+        AddExistingPath(paths, [[bundle resourcePath] stringByAppendingPathComponent:@"GoogleService-Info.plist"]);
+        AddExistingPath(paths, [[bundle bundlePath] stringByAppendingPathComponent:@"GoogleService-Info.plist"]);
+
+        NSString* current_directory = [file_manager currentDirectoryPath];
+        AddExistingPath(paths, [current_directory stringByAppendingPathComponent:@"GoogleService-Info.plist"]);
+        AddExistingPath(paths, [current_directory stringByAppendingPathComponent:@"bundle/osx/Contents/Resources/GoogleService-Info.plist"]);
+        AddExistingPath(paths, [current_directory stringByAppendingPathComponent:@"bundle/osx/GoogleService-Info.plist"]);
+        AddExistingPath(paths, [current_directory stringByAppendingPathComponent:@"bundle/common/GoogleService-Info.plist"]);
+
+        for (NSString* path in paths)
+        {
+            if ([file_manager fileExistsAtPath:path])
+            {
+                return path;
+            }
+        }
+        return nil;
+    }
+
+    static bool ConfigureDefaultAppFromDebugPlist() {
+        NSString* plist_path = FindGoogleServiceInfoPlist();
+        if (!plist_path)
+        {
+            return false;
+        }
+
+        FIROptions* options = [[FIROptions alloc] initWithContentsOfFile:plist_path];
+        if (!options)
+        {
+            dmLogError("Unable to load Firebase options from %s", [plist_path UTF8String]);
+            return false;
+        }
+
+        dmLogInfo("Configuring Firebase from %s", [plist_path UTF8String]);
+        [FIRApp configureWithOptions:options];
+        return true;
+    }
+#endif
 
     void SendSimpleMessage(Message msg, id obj) {
         NSError* error;
@@ -94,7 +152,14 @@ namespace dmFirebase {
         @try {
             if(![FIRApp defaultApp]) {
                 if (!firOptions) {
+#if defined(DM_DEBUG)
+                    if (!ConfigureDefaultAppFromDebugPlist())
+                    {
+                        [FIRApp configure];
+                    }
+#else
                     [FIRApp configure];
+#endif
                 }
                 else {
                     [FIRApp configureWithOptions:firOptions];
@@ -138,4 +203,4 @@ namespace dmFirebase {
 
 } // namespace dmFirebase
 
-#endif // DM_PLATFORM_IOS
+#endif // DM_PLATFORM_IOS || DM_PLATFORM_OSX
