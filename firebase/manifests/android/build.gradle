@@ -5,5 +5,4 @@ repositories {
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:34.16.0')
     implementation 'com.google.firebase:firebase-installations'
-    implementation 'com.google.android.gms:play-services-base:18.10.0'
 }
