@@ -1,8 +1,11 @@
 repositories {
+    google()
     mavenCentral()
 }
 
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:34.16.0')
     implementation 'com.google.firebase:firebase-installations'
+    // Firebase Sessions requests DataStore 1.1.7, which lacks its JNI consumer keep rule.
+    implementation 'androidx.datastore:datastore:1.2.1'
 }
